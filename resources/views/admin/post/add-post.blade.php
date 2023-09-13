@@ -20,6 +20,10 @@
                           <textarea name="postdesc" class="form-control" rows="5"  required></textarea>
                       </div>
                       <div class="form-group">
+                          <label for="exampleInputPassword1">Post image</label>
+                          <input type="file" name="file" required>
+                      </div>
+                      <div class="form-group">
                           <label for="exampleInputPassword1">Category</label>
                           <select name="category" class="form-control">
                           <option value="" selected> Select Category</option>
@@ -29,10 +33,6 @@
                             @endforeach
                         @endif
                           </select>
-                      </div>
-                      <div class="form-group">
-                          <label for="exampleInputPassword1">Post image</label>
-                          <input type="file" name="file" required>
                       </div>
                       <input type="submit" name="submit" class="btn btn-primary" value="Save" required />
                   </form>

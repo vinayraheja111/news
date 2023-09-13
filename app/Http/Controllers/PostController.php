@@ -30,7 +30,9 @@ class PostController extends Controller
      */
     public function store(Request $request)
     {
-          return $request->post();
+
+          //return $request->post('post_title');
+
           $request->validate([
             'post_title' => 'required|unique:posts,title',
             'postdesc' => 'required',
@@ -50,7 +52,7 @@ class PostController extends Controller
         }
           $post->author = 1;
           if($post->save()){
-            return $post;
+            return redirect('admin/posts')->with('success','Post created successfully');
           }else{
             return 'error';
           }
