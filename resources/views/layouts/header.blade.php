@@ -22,7 +22,7 @@
         <div class="row">
             <!-- LOGO -->
             <div class=" col-md-offset-4 col-md-4">
-                <a href="index.php" id="logo"><img src="{{asset('assets/images/news.jpg')}}"></a>
+                <a href="/" id="logo"><img src="{{asset('assets/images/news.jpg')}}"></a>
             </div>
             <!-- /LOGO -->
         </div>
@@ -36,7 +36,7 @@
             <div class="col-md-12">
                 <ul class='menu'>
                     @foreach($category as $cat)
-                    <li><a href='category.php'>{{$cat->category_name}}</a></li>
+                    <li><a href="{{ route('category.post',$cat->id) }}">{{$cat->category_name}}</a></li>
                     @endforeach
                 </ul>
             </div>

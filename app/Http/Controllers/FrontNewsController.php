@@ -11,7 +11,30 @@ class FrontNewsController extends Controller
     public function index()
     {
         $category = category::take(5)->get();
-        $post = post::paginate(1);
-        return view('welcome',compact('post','category'));
+        $post = post::paginate(5);
+        $recentPosts = Post::latest()->get();
+        return view('welcome',compact('post','category','recentPosts'));
+    }
+
+    public function singlepost(Request $request,$id)
+    {
+        $category = category::take(5)->get();
+        $recentPosts = Post::latest()->get();
+        $post = post::find($id);
+        return view('single',compact('post','category','recentPosts'));
+    }
+
+    public function category(Request $request, $id)
+    {
+        $category = category::take(5)->get();
+        $recentPosts = Post::latest()->get();
+        $categoryPosts = category::leftJoin('posts', 'categories.id', '=', 'posts.category_id')
+            ->where('categories.id', $id)
+            ->select('posts.*', 'categories.category_name')
+            ->get();
+    //    echo "<pre>";
+    //     print_r($categoryPosts);
+    //    die;
+       return view('category',compact('categoryPosts','category','recentPosts'));
     }
 }

@@ -20,6 +20,8 @@ use App\Http\Controllers\FrontNewsController;
 
 //Front News Controller
 Route::get('/',[FrontNewsController::class,'index']);
+Route::get('/single-post/{id}',[FrontNewsController::class,'singlepost'])->name('single.post');
+Route::get('/category-post/{id}',[FrontNewsController::class,'category'])->name('category.post');
 
 
 //Login controller
