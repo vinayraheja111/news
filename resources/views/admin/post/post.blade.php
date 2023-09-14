@@ -23,78 +23,19 @@
                           <th>Delete</th>
                       </thead>
                       <tbody>
+                        @if(count($post) >  0)
+                        @foreach($post as $arr)
                           <tr>
-                              <td class='id'>1</td>
-                              <td>Lorem ipsum dolor sit amet</td>
-                              <td>Html</td>
-                              <td>01 Nov, 2019</td>
-                              <td>Admin</td>
-                              <td class='edit'><a href='update-post.php'><i class='fa fa-edit'></i></a></td>
-                              <td class='delete'><a href='delete-post.php'><i class='fa fa-trash-o'></i></a></td>
+                              <td class='id'>{{ $loop->iteration }}</td>
+                              <td>{{ $arr->title }}</td>
+                              <td>{{ $arr->category_id }}</td>
+                              <td>{{ \Carbon\Carbon::parse($arr->created_at)->format('d M, Y') }}</td>
+                              <td>{{ $arr->author == 0 ? 'admin' : 'user' }}</td>
+                              <td class='edit'><a href="{{ route('admin.edit.post',$arr->id) }}"><i class='fa fa-edit'></i></a></td>
+                              <td class='delete'><a href='{{ route("admin.delete.post",$arr->id) }}'><i class='fa fa-trash-o'></i></a></td>
                           </tr>
-                          <tr>
-                              <td class='id'>2</td>
-                              <td>Lorem ipsum dolor sit amet</td>
-                              <td>Html</td>
-                              <td>01 Nov, 2019</td>
-                              <td>Admin</td>
-                              <td class='edit'><a href='update-post.php'><i class='fa fa-edit'></i></a></td>
-                              <td class='delete'><a href='delete-post.php'><i class='fa fa-trash-o'></i></a></td>
-                          </tr>
-                          <tr>
-                              <td class='id'>3</td>
-                              <td>Lorem ipsum dolor sit amet</td>
-                              <td>Html</td>
-                              <td>01 Nov, 2019</td>
-                              <td>Admin</td>
-                              <td class='edit'><a href='update-post.php'><i class='fa fa-edit'></i></a></td>
-                              <td class='delete'><a href='delete-post.php'><i class='fa fa-trash-o'></i></a></td>
-                          </tr>
-                          <tr>
-                              <td class='id'>4</td>
-                              <td>Lorem ipsum dolor sit amet</td>
-                              <td>Html</td>
-                              <td>01 Nov, 2019</td>
-                              <td>Admin</td>
-                              <td class='edit'><a href='update-post.php'><i class='fa fa-edit'></i></a></td>
-                              <td class='delete'><a href='delete-post.php'><i class='fa fa-trash-o'></i></a></td>
-                          </tr>
-                          <tr>
-                              <td class='id'>5</td>
-                              <td>Lorem ipsum dolor sit amet</td>
-                              <td>Html</td>
-                              <td>01 Nov, 2019</td>
-                              <td>Admin</td>
-                              <td class='edit'><a href='update-post.php'><i class='fa fa-edit'></i></a></td>
-                              <td class='delete'><a href='delete-post.php'><i class='fa fa-trash-o'></i></a></td>
-                          </tr>
-                          <tr>
-                              <td class='id'>6</td>
-                              <td>Lorem ipsum dolor sit amet</td>
-                              <td>Html</td>
-                              <td>01 Nov, 2019</td>
-                              <td>Admin</td>
-                              <td class='edit'><a href='update-post.php'><i class='fa fa-edit'></i></a></td>
-                              <td class='delete'><a href='delete-post.php'><i class='fa fa-trash-o'></i></a></td>
-                          </tr>
-                          <tr>
-                              <td class='id'>7</td>
-                              <td>Lorem ipsum dolor sit amet</td>
-                              <td>Html</td>
-                              <td>01 Nov, 2019</td>
-                              <td>Admin</td>
-                              <td class='edit'><a href='update-post.php'><i class='fa fa-edit'></i></a></td>
-                              <td class='delete'><a href='delete-post.php'><i class='fa fa-trash-o'></i></a></td>
-                          </tr>
-                          <tr>
-                              <td class='id'>8</td>
-                              <td>Lorem ipsum dolor sit amet</td>
-                              <td>Html</td>
-                              <td>01 Nov, 2019</td>
-                              <td>Admin</td>
-                              <td class='edit'><a href='update-post.php'><i class='fa fa-edit'></i></a></td>
-                              <td class='delete'><a href='delete-post.php'><i class='fa fa-trash-o'></i></a></td>
-                          </tr>
+                          @endforeach
+                          @endif
                       </tbody>
                   </table>
                   <ul class='pagination admin-pagination'>

@@ -16,6 +16,11 @@
                           <input type="text" name="category" class="form-control" placeholder="Category Name" required>
                       </div>
                       <input type="submit" name="save" class="btn btn-primary" value="Save" required />
+                      @error('category')
+                            <span class="help-block" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                            @enderror
                   </form>
                   <!-- /Form End -->
               </div>

@@ -5,6 +5,7 @@ use App\Http\Controllers\adminController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\FrontNewsController;
 
 /*
 |--------------------------------------------------------------------------
@@ -17,10 +18,11 @@ use App\Http\Controllers\UserController;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+//Front News Controller
+Route::get('/',[FrontNewsController::class,'index']);
 
+
+//Login controller
 Route::get('/admin',[adminController::class,'index'])->name('admin');
 
 //users Controllers
@@ -43,3 +45,6 @@ Route::get('/admin/delete/category/{id}',[CategoryController::class,'destroy'])-
 Route::get('admin/posts',[PostController::class,'index'])->name('admin.posts');
 Route::get('admin/add-post',[PostController::class,'addpost'])->name('admin.add_post');
 Route::post('admin/create-post',[PostController::class,'store'])->name('admin.create.post');
+Route::get('admin/edit-post/{id}',[PostController::class,'editpost'])->name('admin.edit.post');
+Route::post('admin/update-post/{id}',[PostController::class,'updatepost'])->name('admin.update.post');
+Route::get('admin/delete-post/{id}',[PostController::class,'destroy'])->name('admin.delete.post');

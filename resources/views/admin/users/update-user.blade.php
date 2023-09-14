@@ -56,7 +56,7 @@
                               <option value="1" {{ $user->role == 0 ? 'selected' : '' }}>Admin</option>
                           </select>
                       </div>
-                      <input type="submit"  name="save" class="btn btn-primary" value="Save" required />
+                      <input type="submit"  name="save" class="btn btn-primary" value="Update" required />
                   </form>
                    <!-- Form End-->
                </div>

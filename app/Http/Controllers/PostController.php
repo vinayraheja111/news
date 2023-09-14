@@ -13,7 +13,8 @@ class PostController extends Controller
      */
     public function index()
     {
-        return view('admin.post.post');
+        $post = post::all();
+        return view('admin.post.post',compact('post'));
     }
 
     /**
@@ -61,32 +62,49 @@ class PostController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(post $post)
+    public function editpost(post $post,$id)
     {
-        //
+        $post = post::find($id);
+        //dd($post);
+        $category = category::all();
+        return view('admin.post.update-post',compact('post','category'));
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(post $post)
+    public function updatepost(Request $request,$id)
     {
-        //
+        $post = post::find($id);
+
+        $request->validate([
+            'post_title' => 'required|unique:posts,title',
+            'postdesc' => 'required',
+            'category' => 'required',
+            'file' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
+          ]);
+
+          $post->title = $request->input('post_title');
+          $post->description =$request->input('postdesc');
+          $post->category_id = $request->input('category');
+          if ($request->hasFile('file')) {
+            $image = $request->file('file');
+            $imageName = time() . '.' . $image->getClientOriginalExtension();
+            $image->move(public_path('images'), $imageName);
+            $post->image = $imageName;
+        }
+          $post->author = 1;
+          if($post->save()){
+            return redirect('admin/posts')->with('success','Post Updated successfully');
+          }else{
+            return 'error';
+          }
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, post $post)
+    public function destroy(Request $request,$id)
     {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(post $post)
-    {
-        //
+       $post = post::find($id);
+       $post->delete();
+       return redirect('admin/posts')->with('success','Post deletd');
     }
 }

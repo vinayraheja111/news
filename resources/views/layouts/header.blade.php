@@ -35,10 +35,9 @@
         <div class="row">
             <div class="col-md-12">
                 <ul class='menu'>
-                    <li><a href='category.php'>Business</a></li>
-                    <li><a href='category.php'>Entertainment</a></li>
-                    <li><a href='category.php'>Sports</a></li>
-                    <li><a href='category.php'>Politics</a></li>
+                    @foreach($category as $cat)
+                    <li><a href='category.php'>{{$cat->category_name}}</a></li>
+                    @endforeach
                 </ul>
             </div>
         </div>
